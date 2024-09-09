@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="container">
+    @if ($error)
+        <div class="alert alert-danger">
+            Status: {{ $error->status }} - You need to log in again.
+        </div>
+    @endif
     <div class="row">
+
         @foreach ($rewards as $reward)
             {{-- @foreach ($reward as $item) --}}
             <div class="col-xl-4">
