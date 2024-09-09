@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "dotenv": "^16.4.5",
-        "hoyoapi": "^1.2.0"
+        "hoyoapi": "^1.2.0",
+        "pg": "^8.12.0"
     }
 }

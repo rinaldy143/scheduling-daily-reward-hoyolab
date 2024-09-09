@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('error_logs', function (Blueprint $table) {
+        Schema::create('cookies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(); // Relasi dengan tabel users
-            $table->string('cookie')->nullable(); // Simpan cookie
-            $table->string('status'); // Status pesan error
+            $table->text('cookie')->nullable(); // Simpan cookie
+            $table->string('status')->nullable(); // Status pesan error
             $table->timestamps();
 
             // Jika ingin membuat relasi ke tabel users:
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('error_logs');
+        Schema::dropIfExists('cookies');
     }
 };

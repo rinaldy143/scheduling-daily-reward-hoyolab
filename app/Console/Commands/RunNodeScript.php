@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Reward;
-use App\Models\ErrorLog;
+use App\Models\Cookies;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -24,15 +24,18 @@ class RunNodeScript extends Command
         exec($command . ' 2>&1', $output, $return_var); // Redirect stderr ke stdout
 
         $rewards = [];
+        $errors = [];
+
         if ($return_var !== 0) {
             // Jika exit code bukan 0, berarti ada error
             $errorOutput = json_decode(end($output), true);
 
-            ErrorLog::create([
+            Cookies::create([
                 'user_id' => auth()->id(),
                 // 'cookie' => env('HOYO_COOKIE'),
                 'status' => $errorOutput['message'] ?? 'Unknown error',
             ]);
+            $errors[] = $errorOutput; // Menyimpan error output
         } else {
             foreach ($output as $json) {
                 $data = json_decode($json, true);
@@ -53,6 +56,11 @@ class RunNodeScript extends Command
         }
 
         // Misalnya menyimpan hasil ke database atau menulis ke file
-        Log::info('Node.js script output:', $rewards);
+        if (!empty($errors)) {
+            Log::error('Node.js script errors:', $errors);
+        }
+        if (!empty($rewards)) {
+            Log::info('Node.js script rewards:', $rewards);
+        }
     }
 }
