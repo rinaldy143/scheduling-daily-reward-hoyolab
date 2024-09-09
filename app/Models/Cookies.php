@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ErrorLog extends Model
+class Cookies extends Model
 {
     use HasFactory;
 
@@ -15,5 +15,4 @@ class ErrorLog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-}
+    }}
