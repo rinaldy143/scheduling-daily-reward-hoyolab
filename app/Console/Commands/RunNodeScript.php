@@ -6,6 +6,7 @@ use App\Models\Reward;
 use App\Models\Cookies;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class RunNodeScript extends Command
 {
@@ -20,7 +21,14 @@ class RunNodeScript extends Command
     public function handle()
     {
         $output = [];
-        $command = "node " . escapeshellarg(base_path('storage/app/public/js/tes1.mjs'));
+        $userId = Storage::get('user_id.txt'); // Ambil user ID dari file
+
+        if (!$userId) {
+            $this->error('User ID not found in cache.');
+            return;
+        }
+        // dd($userId);
+        $command = "node " . escapeshellarg(base_path('storage/app/public/js/tes2.mjs')) . ' ' . escapeshellarg($userId);
         exec($command . ' 2>&1', $output, $return_var); // Redirect stderr ke stdout
 
         $rewards = [];
@@ -30,16 +38,16 @@ class RunNodeScript extends Command
             // Jika exit code bukan 0, berarti ada error
             $errorOutput = json_decode(end($output), true);
 
-            Cookies::create([
-                'user_id' => auth()->id(),
-                // 'cookie' => env('HOYO_COOKIE'),
+            Cookies::where('user_id', $userId)->update([
                 'status' => $errorOutput['message'] ?? 'Unknown error',
             ]);
             $errors[] = $errorOutput; // Menyimpan error output
         } else {
+            Cookies::where('user_id', $userId)->update([
+                'status' => 'Logged in',
+            ]);
             foreach ($output as $json) {
                 $data = json_decode($json, true);
-
                 Reward::updateOrCreate(
                     [
                         'status' => $data['status'],
