@@ -34,12 +34,16 @@ class CookiesController extends Controller
         ]);
 
         // Simpan data baru ke database
-        $cookies = new Cookies();
-        $cookies->user_id = auth()->id();
-        $cookies->cookie = $request->cookie;
-        $cookies->save();
+        Cookies::updateOrCreate(
+            [
+                'user_id' => auth()->id(), // Kondisi pencarian (cari berdasarkan user_id)
+            ],
+            [
+                'cookie' => $request->cookie, // Data yang akan diperbarui atau dibuat
+            ]
+        );
 
-        return response()->json(['success' => 'Cookie berhasil ditambahkan']);
+        return response()->json(['success' => 'Cookie berhasil ditambahkan atau diperbarui']);
     }
 
     /**

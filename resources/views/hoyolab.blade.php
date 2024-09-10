@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    @if ($error)
+    @if($error && $error->status !== 'Logged in')
         <div class="alert alert-danger">
-            Status: {{ $error->status }} - You need to log in again.
+            Error: {{ $error->status }}
         </div>
     @endif
     <div class="row">
