@@ -3,6 +3,7 @@
 	<!--begin::Head-->
 	<head><base href="../../">
 		<meta charset="utf-8" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>Empty Page | Keenthemes</title>
 		<meta name="description" content="Page with empty content" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
