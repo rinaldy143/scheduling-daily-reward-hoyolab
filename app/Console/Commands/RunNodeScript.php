@@ -33,6 +33,7 @@ class RunNodeScript extends Command
 
         $rewards = [];
         $errors = [];
+        Log::debug($errorOutput = json_decode(end($output), true));
 
         if ($return_var !== 0) {
             // Jika exit code bukan 0, berarti ada error
