@@ -46,21 +46,42 @@ class RunNodeScript extends Command
             Cookies::where('user_id', $userId)->update([
                 'status' => 'Logged in',
             ]);
-            foreach ($output as $json) {
-                $data = json_decode($json, true);
-                Reward::updateOrCreate(
-                    [
+            // Cek apakah tabel Reward kosong
+            if (Reward::count() == 0) {
+                // Jika kosong, lakukan create untuk setiap data dari foreach
+                foreach ($output as $json) {
+                    $data = json_decode($json, true);
+                    Reward::create([
                         'status' => $data['status'],
                         'code' => $data['code'],
-                    ],
-                    [
                         'reward' => json_encode($data['reward']),
                         'info' => json_encode($data['info']),
-                    ]
-                );
+                    ]);
+                    $rewards[] = $data;
+                }
+            } else {
+                // Ambil semua record dari database yang sudah ada
+                $existingRewards = Reward::all();
 
-                $rewards[] = $data;
+                // Pastikan jumlah record di database cukup untuk update
+                foreach ($output as $index => $json) {
+                    $data = json_decode($json, true);
+
+                    // Update record sesuai urutan dengan record yang ada di database
+                    if (isset($existingRewards[$index])) {
+                        $existingReward = $existingRewards[$index];
+                        $existingReward->update([
+                            'status' => $data['status'],
+                            'code' => $data['code'],
+                            'reward' => json_encode($data['reward']),
+                            'info' => json_encode($data['info']),
+                        ]);
+                    }
+
+                    $rewards[] = $data;
+                }
             }
+
         }
 
         // Misalnya menyimpan hasil ke database atau menulis ke file
