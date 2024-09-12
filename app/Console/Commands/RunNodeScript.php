@@ -37,6 +37,7 @@ class RunNodeScript extends Command
         if ($return_var !== 0) {
             // Jika exit code bukan 0, berarti ada error
             $errorOutput = json_decode(end($output), true);
+            Log::debug($errorOutput = json_decode(end($output), true));
 
             Cookies::where('user_id', $userId)->update([
                 'status' => $errorOutput['message'] ?? 'Unknown error',
