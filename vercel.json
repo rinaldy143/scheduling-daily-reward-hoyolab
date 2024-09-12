@@ -40,6 +40,6 @@
         "SESSION_DRIVER": "cookie"
     },
     "outputDirectory": "public",
-    "installCommand": "npm install"
+    "installCommand": "npm install && composer install"
 
 }
