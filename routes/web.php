@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HoyolabController::class, 'index'])->n
 Route::get('/cookies', [App\Http\Controllers\CookiesController::class, 'index'])->name('cookies');
 Route::post('/cookies/update', [CookiesController::class, 'update'])->name('cookies.update');
 Route::post('/cookies/store', [CookiesController::class, 'store'])->name('cookies.store');
+Route::get('/cron', [CookiesController::class, 'handle']);
+
 
 
 
