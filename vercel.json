@@ -36,7 +36,7 @@
         "APP_SERVICES_CACHE": "/tmp/services.php",
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
+        "LOG_CHANNEL": "rollbar",
         "SESSION_DRIVER": "cookie"
     },
     "outputDirectory": "public",
