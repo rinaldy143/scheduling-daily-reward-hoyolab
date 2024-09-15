@@ -75,7 +75,7 @@
                         <!--begin::Brand-->
                         <div class="brand flex-column-auto" id="kt_brand">
                             <!--begin::Logo-->
-                            <a href="index.html" class="brand-logo">
+                            <a href="/" class="brand-logo">
                                 <img alt="Logo" src="assets/media/logos/logo-light.png" />
                             </a>
                             <!--end::Logo-->
@@ -769,7 +769,6 @@
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
 		<script src="assets/plugins/custom/gmaps/gmaps.js"></script>
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
