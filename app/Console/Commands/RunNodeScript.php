@@ -56,33 +56,31 @@ class RunNodeScript extends Command
                 'status' => 'Logged in',
             ]);
 
-            // Cek apakah tabel Reward kosong
-            if (Reward::count() == 0) {
-                // Jika kosong, lakukan create untuk setiap data dari response
-                foreach ($responseBody as $data) {
+            foreach ($responseBody as $data) {
+                // Temukan record yang sesuai dengan user_id dan code
+                $existingReward = Reward::where('user_id', $userId)
+                ->where('code', $data['code'])
+                ->first();
+
+                if ($existingReward) {
+                    // Jika record sudah ada, update
+                    $existingReward->update([
+                        'status' => $data['status'],
+                        'reward' => json_encode($data['reward']),
+                        'info' => json_encode($data['info']),
+                    ]);
+                } else {
+                    // Jika record belum ada, buat baru
                     Reward::create([
                         'status' => $data['status'],
                         'code' => $data['code'],
                         'reward' => json_encode($data['reward']),
                         'info' => json_encode($data['info']),
+                        'user_id' => $userId,
                     ]);
-                    $rewards[] = $data;
                 }
-            } else {
-                // Ambil semua record dari database yang sudah ada
-                foreach ($responseBody as $data) {
-                    $existingReward = Reward::where('code', $data['code'])->first();
-
-                    // Update record sesuai urutan dengan record yang ada di database
-                    if ($existingReward) {
-                        $existingReward->update([
-                            'status' => $data['status'],
-                            'reward' => json_encode($data['reward']),
-                            'info' => json_encode($data['info']),
-                        ]);
-                    }
-                    $rewards[] = $data;
-                }
+                // Tambahkan data ke array rewards untuk keperluan lain jika diperlukan
+                $rewards[] = $data;
             }
         }
 
