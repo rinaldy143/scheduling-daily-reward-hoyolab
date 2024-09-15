@@ -3,6 +3,7 @@
 This program automates the process of claiming rewards from HoYoLab for Genshin Impact and Honkai Star Rail. It runs daily at 05:00 AM (UTC) and updates the database with the latest rewards.
 
 ## How to Get Your HoYoLab Cookie
+
 To use this program, you need to obtain your HoYoLab cookie. Follow the steps below:
 
 1. **Login**: Log in to your HoYoLab account or Genshin Battlepass.
@@ -48,7 +49,13 @@ Database Update: The rewards are stored in the database, and the status of the c
 
 Error Handling: If any errors occur, they are logged and handled properly.
 
-Use Vercel or any other deployment service to deploy the project.
+## References
+
+For detailed instructions on obtaining and using HoYoLab cookies, please refer to the documentation: [HoYoLab Cookie Documentation](https://vermaysha.github.io/hoyoapi/docs/guide/get-started).
+
+## Acknowledgements
+
+Thank you to the developers and maintainers of the HoYoAPI for providing the tools and documentation that make this program possible.
 
 License
 
