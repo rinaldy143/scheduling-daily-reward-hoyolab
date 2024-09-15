@@ -57,6 +57,6 @@ For detailed instructions on obtaining and using HoYoLab cookies, please refer t
 
 Thank you to the developers and maintainers of the HoYoAPI for providing the tools and documentation that make this program possible.
 
-License
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
