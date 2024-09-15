@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('code');
             $table->json('reward')->nullable();
             $table->json('info')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

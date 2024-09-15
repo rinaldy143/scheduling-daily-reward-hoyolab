@@ -4,8 +4,12 @@
 <div class="container">
     @if($error && $error->status !== 'Logged in')
         <div class="alert alert-danger">
-            Error: {{ $error->status }}
+            Error: {{ $error->status ?? 'you are not logged in' }}
         </div>
+    @else
+    <div class="alert alert-success">
+        {{$error->status ?? 'Please fill cookies in user'}}
+    </div>
     @endif
     <div class="row">
 

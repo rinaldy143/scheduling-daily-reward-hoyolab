@@ -9,6 +9,11 @@ class Reward extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['status', 'code', 'reward', 'info'];
+    protected $fillable = ['status', 'code', 'reward', 'info', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
