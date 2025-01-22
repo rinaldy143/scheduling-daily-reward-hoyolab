@@ -1,0 +1,14 @@
+name: Run Daily Script
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs everyday
+  workflow_dispatch:
+
+jobs:
+  send-http-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send HTTP Request
+        run: curl https://scheduling-daily-reward-hoyolab.vercel.app/api/run-script
