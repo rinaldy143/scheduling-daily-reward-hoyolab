@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Send HTTP Request
-        run: curl https://scheduling-daily-reward-hoyolab.vercel.app/api/supabase/fetch-users
+        run: curl https://scheduling-daily-reward-hoyolab.vercel.app/supabase/fetch-users
