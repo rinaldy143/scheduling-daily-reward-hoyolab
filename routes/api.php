@@ -15,8 +15,8 @@ use App\Http\Controllers\HoyolabController;
 |
 */
 
-Route::get('/supabase/fetch-users', [HoyolabController::class, 'fetchUsers'])->name('fetchUsers');
-Route::get('/run-script', [HoyolabController::class, 'runNodeScript'])->name('runNodeScript');
+// Route::get('/supabase/fetch-users', [HoyolabController::class, 'fetchUsers'])->name('fetchUsers');
+// Route::get('/run-script', [HoyolabController::class, 'runNodeScript'])->name('runNodeScript');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -22,6 +22,8 @@ Route::get('/', function () {
     }
     return view('auth.login');
 });
+Route::get('/supabase/fetch-users', [HoyolabController::class, 'fetchUsers'])->name('fetchUsers');
+Route::get('/run-script', [HoyolabController::class, 'runNodeScript'])->name('runNodeScript');
 
 Auth::routes();
 
