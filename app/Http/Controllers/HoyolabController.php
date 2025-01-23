@@ -55,7 +55,6 @@ class HoyolabController extends Controller
     {
         // Menjalankan perintah artisan
         $exitCode = Artisan::call('run:nodescript');
-
         // Mengecek hasil eksekusi dan mengembalikan respons
         if ($exitCode === 0) {
             return response()->json([

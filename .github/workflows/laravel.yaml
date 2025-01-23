@@ -1,0 +1,40 @@
+name: Run Artisan Command
+
+on:
+  workflow_dispatch: # Memungkinkan menjalankan workflow manual dari GitHub
+  push:              # Atau otomatis saat ada push ke branch tertentu
+    branches:
+      - main
+
+jobs:
+  artisan-command:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout kode repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Setup PHP
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1' # Pastikan sesuai dengan versi PHP aplikasi Anda
+        extensions: mbstring, pdo, bcmath, intl
+        tools: composer
+
+    # 3. Install dependencies dengan Composer
+    - name: Install dependencies
+      run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+    # 4. Setup file .env
+    - name: Copy .env file
+      run: cp .env.example .env
+
+    # 5. Generate application key
+    - name: Generate application key
+      run: php artisan key:generate
+
+    # 7. Jalankan command artisan
+    - name: Run Artisan Command
+      run: php artisan run:nodescript
