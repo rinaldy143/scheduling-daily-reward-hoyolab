@@ -5,6 +5,8 @@ on:
   push:              # Atau otomatis saat ada push ke branch tertentu
     branches:
       - main
+    schedule:          # Menjadwalkan workflow berjalan otomatis
+      - cron: '0 0 * * *' # Menjadwalkan setiap hari pada pukul 00:00 UTC
 
 jobs:
   artisan-command:

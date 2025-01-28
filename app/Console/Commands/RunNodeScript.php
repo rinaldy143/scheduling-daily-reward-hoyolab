@@ -22,7 +22,7 @@ class RunNodeScript extends Command
     public function handle()
     {
         // Ambil user ID dari file
-        $userId = Storage::get('user_id.txt');
+        $userId = Storage::get('user_id.txt') ?? 1;
 
         if (!$userId) {
             $this->error('User ID not found in cache.');
